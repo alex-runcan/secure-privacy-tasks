@@ -1,0 +1,61 @@
+<div class="page-container">
+  <h1>Products Page</h1>
+  <button
+    class="add-button"
+    nz-button
+    nzType="primary"
+    nzShape="round"
+    (click)="openAddProductModal()"
+  >
+    <span nz-icon nzType="plus"></span>
+    Add Product
+  </button>
+  <div class="table-container">
+    <nz-table
+      #filterTable
+      [nzData]="(products$ | async) ?? []"
+      [nzLoading]="areProductsLoading$ | async"
+      [nzShowSizeChanger]="true"
+      [nzPageIndex]="pageIndex"
+      [nzPageSize]="pageSize"
+      (nzQueryParams)="onQueryParamsChange($event)"
+      nzTableLayout="fixed"
+    >
+      <thead>
+        <tr>
+          <th nzColumnKey="name">Name</th>
+          <th nzColumnKey="description">Description</th>
+          <th
+            nzSort
+            [nzSortOrder]="sortField === 'price' ? sortOrder : null"
+            [nzSortFn]="true"
+            nzColumnKey="price"
+          >
+            Price
+          </th>
+          <th
+            nzColumnKey="rating"
+            [nzFilters]="listOfColumns[3].fitlerOptions ?? []"
+            [nzFilterMultiple]="true"
+            [inputMode]="'menu'"
+            [nzFilterFn]="true"
+          >
+            Rating
+          </th>
+          <th nzColumnKey="createdAt">Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (data of filterTable.data; track data) {
+        <tr>
+          <td>{{ data.name }}</td>
+          <td>{{ data.description }}</td>
+          <td>{{ data.price | currency : "EUR" }}</td>
+          <td>{{ data.rating }}</td>
+          <td>{{ data.createdAt | date }}</td>
+        </tr>
+        }
+      </tbody>
+    </nz-table>
+  </div>
+</div>

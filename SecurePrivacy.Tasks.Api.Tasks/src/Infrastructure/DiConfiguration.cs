@@ -9,5 +9,6 @@ public static class DiConfiguration
     public static void ConfigureInfrastructureDependencies(this IServiceCollection services)
     {
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IBinaryStringService, BinaryStringService>();
     }
 }

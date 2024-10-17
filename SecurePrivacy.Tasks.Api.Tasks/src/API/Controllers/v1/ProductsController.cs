@@ -12,22 +12,20 @@ namespace API.Controllers.v1;
 [Route("api/v{version:apiVersion}/products")]
 public class ProductsController : ControllerBase
 {
-    private readonly ILogger<ProductsController> _logger;
     private readonly IProductService _productService;
     private readonly IMapper _mapper;
 
-    public ProductsController(ILogger<ProductsController> logger, IProductService productService,
+    public ProductsController(IProductService productService,
         IMapper mapper)
     {
-        _logger = logger;
         _productService = productService;
         _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ProductResponseDto>>> GetProducts([FromQuery] int offset = 0, [FromQuery] int limit = 50)
+    public async Task<ActionResult<List<ProductResponseDto>>> GetProducts([FromQuery] ProductSerachDto productSearchParams)
     {
-        var productModels = await _productService.GetProductsAsync(offset, limit);
+        var productModels = await _productService.GetProductsAsync(productSearchParams.PageIndex, productSearchParams.PageSize);
         return Ok(_mapper.Map<List<ProductModel>, List<ProductResponseDto>>(productModels));
     }
 

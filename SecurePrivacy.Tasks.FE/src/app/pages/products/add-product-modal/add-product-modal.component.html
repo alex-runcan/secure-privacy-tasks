@@ -1,0 +1,68 @@
+<form nz-form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name"
+      >Name</nz-form-label
+    >
+    <nz-form-control
+      [nzSm]="14"
+      [nzXs]="24"
+      nzErrorTip="Please input the product name!"
+    >
+      <input nz-input formControlName="name" id="name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description" nzRequired
+      >Description</nz-form-label
+    >
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <textarea
+        nz-input
+        formControlName="description"
+        id="description"
+      ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="price"
+      >Price</nz-form-label
+    >
+    <nz-form-control
+      [nzSm]="14"
+      [nzXs]="24"
+      nzErrorTip="Please input the price!"
+    >
+      <input nz-input type="number" formControlName="price" id="price" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="rating"
+      >Rating</nz-form-label
+    >
+    <nz-form-control
+      [nzSm]="14"
+      [nzXs]="24"
+      nzErrorTip="Please input a rating between 1 and 5!"
+    >
+      <input nz-input type="number" formControlName="rating" id="rating" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="modal-footer">
+    <button nz-button nzType="default" nzShape="round" (click)="cancel()">
+      Cancel
+    </button>
+    <button
+      nz-button
+      nzType="primary"
+      nzShape="round"
+      [disabled]="!formGroup.valid"
+      (click)="submitForm()"
+    >
+      Add
+    </button>
+  </div>
+</form>

@@ -1,0 +1,26 @@
+<div class="binary-string-container">
+  <h1>Binary String Checker</h1>
+  <div class="input-group-container">
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input
+        type="text"
+        nz-input
+        placeholder="Input the binary string to be validated"
+        [(ngModel)]="input"
+      />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        nzSearch
+        (click)="validate()"
+        [nzLoading]="isRequestPending$ | async"
+      >
+        Validate
+      </button>
+    </ng-template>
+  </div>
+  <span>{{ resultMessage$ | async }}</span>
+</div>

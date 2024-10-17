@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "src\DataAcces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoSeedRunner", "src\MongoSeedRunner\MongoSeedRunner.csproj", "{18F7DA5F-44E2-4B05-9449-CF4EE36378A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryStringTesting", "src\BinaryStringTesting\BinaryStringTesting.csproj", "{592BC61F-8971-434F-AE34-BA3943E1C9C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{18F7DA5F-44E2-4B05-9449-CF4EE36378A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18F7DA5F-44E2-4B05-9449-CF4EE36378A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18F7DA5F-44E2-4B05-9449-CF4EE36378A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592BC61F-8971-434F-AE34-BA3943E1C9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592BC61F-8971-434F-AE34-BA3943E1C9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592BC61F-8971-434F-AE34-BA3943E1C9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592BC61F-8971-434F-AE34-BA3943E1C9C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

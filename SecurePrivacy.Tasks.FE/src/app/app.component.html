@@ -1,0 +1,31 @@
+<nz-layout class="base-layout">
+  <nz-sider
+    nzWidth="200px"
+    nzTheme="light"
+  >
+    <div class="logo">
+      <img src="https://images.prismic.io/secure-privacy/fea99b28-ad05-4398-8531-1b4178f1f9e6_logo.svg?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max&q=45&w=105&h=43" alt="Logo Placeholder">
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline">
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/products">
+          <span nz-icon nzType="home" nzTheme="outline"></span>
+          <span>Products</span>
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/binary-strings">
+          <span nz-icon nzType="code" nzTheme="outline"></span>
+          <span>Binary Strings</span>
+        </a>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="full-height">
+    <nz-content class="full-height">
+      <div class="full-height">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

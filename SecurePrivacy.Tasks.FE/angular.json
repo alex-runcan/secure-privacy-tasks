@@ -37,10 +37,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/cookieconsent/build/cookieconsent.min.css",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/cookieconsent/build/cookieconsent.min.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -35,6 +35,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { BinaryStringEffects } from '@store/binary-string/effects';
+import { NgcCookieConsentModule } from 'ngx-cookieconsent';
+import { COOKIE_CONFIG } from '@app/constants/gdpr-consent-config.constants';
 
 const icons = [
   MenuFoldOutline,
@@ -82,6 +84,7 @@ const icons = [
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    NgcCookieConsentModule.forRoot(COOKIE_CONFIG),
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons },

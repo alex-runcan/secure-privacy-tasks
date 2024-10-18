@@ -22,5 +22,5 @@
       </button>
     </ng-template>
   </div>
-  <span>{{ resultMessage$ | async }}</span>
+  <span class="result">{{ (resultMessage$ | async) ?? "" }}</span>
 </div>

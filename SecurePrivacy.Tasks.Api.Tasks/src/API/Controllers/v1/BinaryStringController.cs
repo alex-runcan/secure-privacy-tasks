@@ -19,23 +19,35 @@ public class BinaryStringController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<string> ValidateBinaryString([FromBody] ValidateBinaryStringRequestDto request)
+    public ActionResult<ValidateBinaryStringResponseDto> ValidateBinaryString([FromBody] ValidateBinaryStringRequestDto request)
     {
         try
         {
-            return Ok(_binaryStringService.ValidateBinaryString(request.Value));
+            return Ok(new ValidateBinaryStringResponseDto
+            {
+                Response = _binaryStringService.ValidateBinaryString(request.Value),   
+            });
         }
         catch (BinaryStringUnbalancedBytesException e)
         {
-            return Ok(e.Message);
+            return Ok(new ValidateBinaryStringResponseDto
+            {
+                Response = e.Message
+            });
         }
         catch (BinaryStringPrefixEvaluationFailedException e)
         {
-            return Ok(e.Message);
+            return Ok(new ValidateBinaryStringResponseDto
+            {
+                Response = e.Message
+            });
         }
         catch (Exception e)
         {
-            return BadRequest(e.Message);
+            return BadRequest(new ValidateBinaryStringResponseDto
+            {
+                Response = e.Message
+            });
         }
     }
 }

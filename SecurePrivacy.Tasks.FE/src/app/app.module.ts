@@ -60,7 +60,7 @@ const icons = [
     ReactiveFormsModule,
     StoreModule.forFeature('products', reducers),
     EffectsModule.forFeature([ProductsEffects]),
-    StoreModule.forFeature('binary-string', BinaryStringReducers.reducers),
+    StoreModule.forFeature('binaryString', BinaryStringReducers.reducers),
     EffectsModule.forFeature([BinaryStringEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

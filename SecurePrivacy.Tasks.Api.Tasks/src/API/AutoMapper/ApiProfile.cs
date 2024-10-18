@@ -10,5 +10,6 @@ public class ApiProfile : Profile
     {
         CreateMap<ProductModel, ProductResponseDto>();
         CreateMap<CreateProductRequestDto, ProductModel>();
+        CreateMap<ProductSearchDto, ProductSearchParamsModel>();
     }
 }

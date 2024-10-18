@@ -23,10 +23,16 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<ProductResponseDto>>> GetProducts([FromQuery] ProductSerachDto productSearchParams)
+    public async Task<ActionResult<ProductSearchResponseDto>> GetProducts([FromQuery] ProductSearchDto productSearchParams)
     {
-        var productModels = await _productService.GetProductsAsync(productSearchParams.PageIndex, productSearchParams.PageSize);
-        return Ok(_mapper.Map<List<ProductModel>, List<ProductResponseDto>>(productModels));
+        var searchParamsModel = _mapper.Map<ProductSearchParamsModel>(productSearchParams);
+        var (count, productModels) = await _productService.GetProductsAsync(searchParamsModel);
+        var productDtos = _mapper.Map<List<ProductModel>, List<ProductResponseDto>>(productModels); 
+        return Ok(new ProductSearchResponseDto
+        {
+            Count = count,
+            Products = productDtos,
+        });
     }
 
     [HttpPost]

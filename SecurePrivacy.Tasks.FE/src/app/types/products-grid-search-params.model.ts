@@ -1,16 +1,6 @@
-export interface FilterModel {
-  key: string;
-  value: number[];
-}
-
-export interface SortModel {
-  key: string;
-  value: 'ascend' | 'descend' | null;
-}
-
 export interface ProductGridSearchParamsModel {
-  pageIndex?: number;
-  pageSize?: number;
-  sort?: SortModel[];
-  filter?: FilterModel[];
+  pageIndex: number;
+  pageSize: number;
+  priceSort?: string | 'ascend' | 'descend' | null;
+  ratingFilter?: number;
 }

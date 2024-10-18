@@ -4,7 +4,7 @@ import { ProductModel } from '@app/types/product.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as ProductActions from '@store/products/actions';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, EMPTY, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 
 @Injectable()
 export class ProductsEffects {
@@ -19,9 +19,7 @@ export class ProductsEffects {
       ofType(ProductActions.getProducts),
       mergeMap((action) => {
         return this.productsService.getProducts(action.searchParams).pipe(
-          map((products: ProductModel[]) =>
-            ProductActions.getProductsSuccess({ products })
-          ),
+          map((products) => ProductActions.getProductsSuccess({ products })),
           catchError((error) =>
             of(ProductActions.getProductsFailure({ error: error.message }))
           )
@@ -35,7 +33,11 @@ export class ProductsEffects {
       ofType(ProductActions.addProduct),
       mergeMap((action) => {
         return this.productsService.addProduct(action.product).pipe(
-          map((_) => ProductActions.addProductSuccess()),
+          map((_) =>
+            ProductActions.addProductSuccess({
+              searchParams: action.searchParams,
+            })
+          ),
           catchError((error) =>
             of(ProductActions.addProductFailure({ error: error.message }))
           )
@@ -53,23 +55,24 @@ export class ProductsEffects {
           'The product was successfully added!'
         )
       ),
-      exhaustMap(() =>
+      exhaustMap((action) =>
         of(
           ProductActions.getProducts({
-            searchParams: {},
+            searchParams: action.searchParams,
           })
         )
       )
     )
   );
 
-  addProductError$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProductActions.addProductFailure),
-      exhaustMap((action) => {
-        this.notificationService.error('Error', action.error);
-        return of(action);
-      })
-    )
+  addProductError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ProductActions.addProductFailure),
+        tap((action) => {
+          this.notificationService.error('Error', action.error);
+        })
+      ),
+    { dispatch: false }
   );
 }

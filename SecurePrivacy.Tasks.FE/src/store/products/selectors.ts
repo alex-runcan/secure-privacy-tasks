@@ -10,6 +10,10 @@ export const productsSelector = createSelector(
   selectFeature,
   (state) => state.products
 );
+export const productsTotalCountSelector = createSelector(
+  selectFeature,
+  (state) => state.totalCount
+);
 export const productsRetrievalErrorSelector = createSelector(
   selectFeature,
   (state) => state.error

@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
 import {
   areProductsLoadingSelector,
   productsSelector,
+  productsTotalCountSelector,
 } from '@store/products/selectors';
 import { ProductModel } from '@app/types/product.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddModalComponent } from './add-product-modal/add-product-modal.component';
 import { COLUMN_DEFINITIONS } from '@app/constants/products-columns-definition.constants';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ProductGridSearchParamsModel } from '@app/types/products-grid-search-params.model';
 
 @Component({
@@ -18,14 +20,17 @@ import { ProductGridSearchParamsModel } from '@app/types/products-grid-search-pa
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   protected listOfColumns = COLUMN_DEFINITIONS;
   protected areProductsLoading$: Observable<boolean>;
   protected products$: Observable<ProductModel[]>;
-  protected pageIndex: number = 1;
-  protected pageSize: number = 10;
+  protected totalProductsCount$: Observable<number>;
   protected sortField: string | null = null;
   protected sortOrder: 'ascend' | 'descend' | null = null;
+  protected searchParams: ProductGridSearchParamsModel = {
+    pageIndex: 1,
+    pageSize: 10,
+  };
 
   constructor(
     private store: Store<AppState>,
@@ -35,13 +40,8 @@ export class ProductsComponent implements OnInit {
       select(areProductsLoadingSelector)
     );
     this.products$ = this.store.pipe(select(productsSelector));
-  }
-
-  ngOnInit(): void {
-    this.store.dispatch(
-      ProductActions.getProducts({
-        searchParams: {} as ProductGridSearchParamsModel,
-      })
+    this.totalProductsCount$ = this.store.pipe(
+      select(productsTotalCountSelector)
     );
   }
 
@@ -57,15 +57,25 @@ export class ProductsComponent implements OnInit {
       if (!result) {
         return;
       }
-      console.log(result);
-      this.store.dispatch(ProductActions.addProduct({ product: result }));
+      this.store.dispatch(
+        ProductActions.addProduct({
+          product: result,
+          searchParams: this.searchParams,
+        })
+      );
     });
   }
 
-  protected onQueryParamsChange(event: any) {
+  protected onQueryParamsChange(event: NzTableQueryParams) {
+    this.searchParams = {
+      pageIndex: event.pageIndex,
+      pageSize: event.pageSize,
+      priceSort: event.sort[0]?.value,
+      ratingFilter: event.filter[0]?.value,
+    };
     this.store.dispatch(
       ProductActions.getProducts({
-        searchParams: {},
+        searchParams: this.searchParams,
       })
     );
   }

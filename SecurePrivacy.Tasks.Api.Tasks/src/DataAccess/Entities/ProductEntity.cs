@@ -16,8 +16,8 @@ public class ProductEntity
     [BsonElement("Description")]
     public string Description { get; set; } = "";
     [BsonElement("Price")]
-    [BsonRepresentation(BsonType.Decimal128)]
-    public decimal Price { get; set; }
+    [BsonRepresentation(BsonType.Double)]
+    public double Price { get; set; }
     [BsonElement("Rating")]
     [Range(1, 5)]
     public int Rating { get; set; }

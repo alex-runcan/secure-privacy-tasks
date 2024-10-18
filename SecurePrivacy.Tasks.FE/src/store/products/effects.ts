@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from '@api/services/products.service';
-import { ProductModel } from '@app/types/product.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as ProductActions from '@store/products/actions';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { catchError, EMPTY, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, of, tap } from 'rxjs';
 
 @Injectable()
 export class ProductsEffects {

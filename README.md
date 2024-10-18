@@ -50,7 +50,7 @@ Next, the 2 features of the application will be presented and detailed.
 # Products Explorer
 This feature allows users to browse products, sort by Price, and filter by Rating. To improve performance on these 2 operations, a compound index according to the ESR(Equality, Sort, Range) rule was added to the Rating and Price.
 
-[Products Grid](https://github.com/user-attachments/assets/45717f35-0ae8-4263-b583-f559bb995206)
+![Products Grid](https://github.com/user-attachments/assets/45717f35-0ae8-4263-b583-f559bb995206)
 
 It also allows users to add new products, the form validates all the fields before allowing to submit the product details.
 
@@ -62,7 +62,13 @@ For the binary string checker, the following constraints are validated:
 
 The result of the validation is presented below the input after the request is done:
 
-[Validate Binary String](https://github.com/user-attachments/assets/1870adb4-bb52-442c-96a4-d08285f5c1c7)
+![Validate Binary String](https://github.com/user-attachments/assets/1870adb4-bb52-442c-96a4-d08285f5c1c7)
+
+To ensure that the validation method covers all the scenarios, Unit tests using NUnit3 were added in the ```BinaryStringTesting``` project
+
+![Unit Tests Results](https://github.com/user-attachments/assets/d9daef3e-2061-4bd3-901d-153700073e0f)
 
 # GDPR Considerations
 Since the application doesn't store any PII fields that can be subject to the GDPR complience list, the user is only prompted with a modal for GDPR Agreement, and all the data stored will be encrypted with Mongo's default ```AES256-CBC``` encryption algorithm.
+
+![GDPR Consent popup](https://github.com/user-attachments/assets/de03e98b-0d7b-4334-8dd6-eced3383d01d)
